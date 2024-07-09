@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -7,7 +9,10 @@ class LocalNotificationService {
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
-  static onTap(NotificationResponse response) {}
+  static StreamController<NotificationResponse> streamController = StreamController();
+  static onTap(NotificationResponse notificationResponse) {
+    streamController.add(notificationResponse);
+  }
 
   static Future init() async {
     InitializationSettings settings = const InitializationSettings(
@@ -46,7 +51,7 @@ class LocalNotificationService {
     NotificationDetails details = const NotificationDetails(
       android: AndroidNotificationDetails(
         "id 2",
-        "Repeat notification",
+        "Repeat Notification",
         importance: Importance.max,
         priority: Priority.high,
         playSound: true,
