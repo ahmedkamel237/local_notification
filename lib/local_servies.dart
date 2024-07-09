@@ -21,6 +21,7 @@ class LocalNotificationService {
     );
   }
 
+
   static void showBasicNotifications() async {
     NotificationDetails details =  NotificationDetails(
       android: AndroidNotificationDetails(
